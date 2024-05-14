@@ -1,57 +1,36 @@
-// เชื่อมต่อกับ MongoDB
-use moviesDB
+เราสามารถสรุปคำสั่งพื้นฐานที่ใช้ในบทนี้ได้ดังนี้
 
-// สร้างคอลเลกชัน "movies" และเพิ่มข้อมูลภาพยนตร์
-db.movies.insertMany([
-  {
-    "title": "Rocky",
-    "releaseDate": new Date("Dec 3, 1976"),
-    "genre": "Action",
-    "about": "A small-time boxer gets a supremely rare chance to fight a heavy-weight champion in a bout in which he strives to go the distance for his self-respect.",
-    "countries": ["USA"],
-    "cast": ["Sylvester Stallone", "Talia Shire", "Burt Young"],
-    "writers": ["Sylvester Stallone"],
-    "directors": ["John G. Avildsen"]
-  },
-  {
-    "title": "Rambo 4",
-    "releaseDate": new Date("Jan 25, 2008"),
-    "genre": "Action",
-    "about": "In Thailand, John Rambo joins a group of mercenaries to venture into war-torn Burma, and rescue a group of Christian aid workers who were kidnapped by the ruthless local infantry unit.",
-    "countries": ["USA"],
-    "cast": ["Sylvester Stallone", "Julie Benz"]
-  }
-])
+```javascript
+// เชื่อมต่อกับฐานข้อมูล MongoDB
+use databaseName
 
-// ตรวจสอบว่าเอกสารถูกเพิ่มเข้าไปโดยการดึงเอกสารออกมา
-db.movies.find().pretty()
+// สร้างคอลเลกชัน
+db.createCollection("collectionName")
 
-// สร้างคอลเลกชัน "awards" และเพิ่มข้อมูลรางวัล
-db.awards.insertMany([
-  {
-    "title": "Oscars",
-    "year": "1976",
-    "category": "Best Film",
-    "nominees": ["Rocky", "All The President's Men", "Bound For Glory", "Network", "Taxi Driver"],
-    "winners": [
-      {
-        "movie": "Rocky"
-      }
-    ]
-  },
-  {
-    "title": "Oscars",
-    "year": "1976",
-    "category": "Actor In A Leading Role",
-    "nominees": ["PETER FINCH", "ROBERT DE NIRO", "GIANCARLO GIANNINI", "WILLIAM HOLDEN", "SYLVESTER STALLONE"],
-    "winners": [
-      {
-        "actor": "PETER FINCH",
-        "movie": "Network"
-      }
-    ]
-  }
-])
+// เพิ่มเอกสารเดี่ยวลงในคอลเลกชัน
+db.collectionName.insertOne({...})
 
-// ตรวจสอบว่าการเพิ่มข้อมูลของคุณได้บันทึกเอกสารลงในคอลเลกชันตามที่ต้องการโดยการดึงเอกสารออกมา
-db.awards.find().pretty()
+// เพิ่มเอกสารหลายรายการลงในคอลเลกชัน
+db.collectionName.insertMany([{...}, {...}])
+
+// ดึงเอกสารจากคอลเลกชัน
+db.collectionName.find()
+
+// แสดงรายชื่อฐานข้อมูลทั้งหมด
+show dbs
+
+// แสดงรายชื่อคอลเลกชันในฐานข้อมูลปัจจุบัน
+show collections
+```
+
+คำอธิบาย:
+
+1. ใช้คำสั่ง `use` เพื่อเชื่อมต่อและเลือกฐานข้อมูลที่ต้องการทำงานด้วย
+2. สร้างคอลเลกชันใหม่ด้วยคำสั่ง `db.createCollection()`
+3. เพิ่มเอกสารเดี่ยวลงในคอลเลกชันโดยใช้คำสั่ง `db.collectionName.insertOne()`
+4. เพิ่มเอกสารหลายรายการลงในคอลเลกชันโดยใช้คำสั่ง `db.collectionName.insertMany()`
+5. ดึงเอกสารจากคอลเลกชันโดยใช้คำสั่ง `db.collectionName.find()`
+6. แสดงรายชื่อฐานข้อมูลทั้งหมดที่มีอยู่ด้วยคำสั่ง `show dbs`
+7. แสดงรายชื่อคอลเลกชันในฐานข้อมูลปัจจุบันด้วยคำสั่ง `show collections`
+
+โค้ดเหล่านี้ครอบคลุมคำสั่งพื้นฐานที่ใช้ในการทำงานกับ MongoDB เช่น การเชื่อมต่อกับฐานข้อมูล การสร้างคอลเลกชัน การเพิ่มเอกสาร และการดึงเอกสารจากคอลเลกชัน นอกจากนี้ยังมีคำสั่งสำหรับแสดงรายชื่อฐานข้อมูลและคอลเลกชันที่มีอยู่ ซึ่งเป็นประโยชน์ในการสำรวจและจัดการโครงสร้างฐานข้อมูล
