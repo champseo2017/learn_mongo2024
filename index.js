@@ -1,15 +1,48 @@
 /* 
-// แทรกเอกสารเดียวลงในคอลเลกชัน "blogs"
-db.Collection1.insertOne({
-  username: "Zakariya",
-  noOfBlogs: 100,
-  tags: ["science", "fiction"]
-})
+// แทรกหลายเอกสารพร้อมกันลงในคอลเลกชัน "Collection1"
+db.Collection1.insertMany([
+  {
+    username: "Thaha",
+    noOfBlogs: 200,
+    tags: ["science", "robotics"]
+  },
+  {
+    username: "Thayebbah",
+    noOfBlogs: 500,
+    tags: ["cooking", "general knowledge"]
+  },
+  {
+    username: "Thaherah",
+    noOfBlogs: 50,
+    tags: ["beauty", "arts"]
+  }
+])
 
-// ผลลัพธ์ของคำสั่ง insertOne จะแสดงสถานะการแทรกและ ID ของเอกสารที่ถูกแทรก
+// ผลลัพธ์ของคำสั่ง insertMany จะแสดงสถานะการแทรกและ ID ของเอกสารที่ถูกแทรกทั้งหมด
 /*
 {
   "acknowledged" : true,
-  "insertedId" : ObjectId("5ea3a1561df5c3fd4f752636")
+  "insertedIds" : [
+    ObjectId("5f33cf74592962df72246ae8"),
+    ObjectId("5f33cf74592962df72246ae9"),
+    ObjectId("5f33cf74592962df72246aea")
+  ]
 }
 */
+db.Collection1.insertMany([
+  {
+    username: "Thaha",
+    noOfBlogs: 200,
+    tags: ["science", "robotics"],
+  },
+  {
+    username: "Thayebbah",
+    noOfBlogs: 500,
+    tags: ["cooking", "general knowledge"],
+  },
+  {
+    username: "Thaherah",
+    noOfBlogs: 50,
+    tags: ["beauty", "arts"],
+  },
+]);
