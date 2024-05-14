@@ -1,50 +1,57 @@
-// Insert ข้อมูลหลายรายการลงในคอลเลกชัน "records"
-db.records.insertMany([
-  { Name: "Aaliya A", City: "Sydney" },
-  { Name: "Naseem A", City: "New Delhi" },
-]);
+// เชื่อมต่อกับ MongoDB
+use moviesDB
 
-// ผลลัพธ์จะแสดงสถานะการ insert และ ID ของเอกสารที่ถูกเพิ่ม
-/*
+// สร้างคอลเลกชัน "movies" และเพิ่มข้อมูลภาพยนตร์
+db.movies.insertMany([
   {
-    "acknowledged" : true,
-    "insertedIds" : [
-      ObjectId("5f33cfac592962df72246aeb"),
-      ObjectId("5f33cfac592962df72246aec")
+    "title": "Rocky",
+    "releaseDate": new Date("Dec 3, 1976"),
+    "genre": "Action",
+    "about": "A small-time boxer gets a supremely rare chance to fight a heavy-weight champion in a bout in which he strives to go the distance for his self-respect.",
+    "countries": ["USA"],
+    "cast": ["Sylvester Stallone", "Talia Shire", "Burt Young"],
+    "writers": ["Sylvester Stallone"],
+    "directors": ["John G. Avildsen"]
+  },
+  {
+    "title": "Rambo 4",
+    "releaseDate": new Date("Jan 25, 2008"),
+    "genre": "Action",
+    "about": "In Thailand, John Rambo joins a group of mercenaries to venture into war-torn Burma, and rescue a group of Christian aid workers who were kidnapped by the ruthless local infantry unit.",
+    "countries": ["USA"],
+    "cast": ["Sylvester Stallone", "Julie Benz"]
+  }
+])
+
+// ตรวจสอบว่าเอกสารถูกเพิ่มเข้าไปโดยการดึงเอกสารออกมา
+db.movies.find().pretty()
+
+// สร้างคอลเลกชัน "awards" และเพิ่มข้อมูลรางวัล
+db.awards.insertMany([
+  {
+    "title": "Oscars",
+    "year": "1976",
+    "category": "Best Film",
+    "nominees": ["Rocky", "All The President's Men", "Bound For Glory", "Network", "Taxi Driver"],
+    "winners": [
+      {
+        "movie": "Rocky"
+      }
+    ]
+  },
+  {
+    "title": "Oscars",
+    "year": "1976",
+    "category": "Actor In A Leading Role",
+    "nominees": ["PETER FINCH", "ROBERT DE NIRO", "GIANCARLO GIANNINI", "WILLIAM HOLDEN", "SYLVESTER STALLONE"],
+    "winners": [
+      {
+        "actor": "PETER FINCH",
+        "movie": "Network"
+      }
     ]
   }
-  */
+])
 
-// ดึงข้อมูลจากคอลเลกชัน "records" โดยใช้คำสั่ง find() ธรรมดา
-db.records.find();
-
-// ผลลัพธ์จะแสดงเอกสารที่ถูกดึงมาในรูปแบบที่ไม่ได้จัดรูปแบบ
-/*
-  {
-    "_id" : ObjectId("5f33cfac592962df72246aeb"),
-    "Name" : "Aaliya A",
-    "City" : "Sydney"
-  }
-  {
-    "_id" : ObjectId("5f33cfac592962df72246aec"),
-    "Name" : "Naseem A",
-    "City" : "New Delhi"
-  }
-  */
-
-// ดึงข้อมูลจากคอลเลกชัน "records" โดยใช้คำสั่ง find() ร่วมกับเมธอด pretty()
-db.Collection1.find().pretty();
-
-// ผลลัพธ์จะแสดงเอกสารที่ถูกดึงมาในรูปแบบที่จัดรูปแบบอย่างสวยงาม
-/*
-  {
-    "_id" : ObjectId("5f33cfac592962df72246aeb"),
-    "Name" : "Aaliya A",
-    "City" : "Sydney"
-  }
-  {
-    "_id" : ObjectId("5f33cfac592962df72246aec"),
-    "Name" : "Naseem A",
-    "City" : "New Delhi"
-  }
-  */
+// ตรวจสอบว่าการเพิ่มข้อมูลของคุณได้บันทึกเอกสารลงในคอลเลกชันตามที่ต้องการโดยการดึงเอกสารออกมา
+db.awards.find().pretty()
