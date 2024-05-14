@@ -1,48 +1,50 @@
-/* 
-// ดึงเอกสารทั้งหมดจากคอลเลกชัน "Collection1"
-db.Collection1.find()
+// Insert ข้อมูลหลายรายการลงในคอลเลกชัน "records"
+db.records.insertMany([
+  { Name: "Aaliya A", City: "Sydney" },
+  { Name: "Naseem A", City: "New Delhi" },
+]);
 
-// ผลลัพธ์จะแสดงเอกสารทั้งหมดในคอลเลกชัน
+// ผลลัพธ์จะแสดงสถานะการ insert และ ID ของเอกสารที่ถูกเพิ่ม
 /*
-{
-  "_id" : ObjectId("5f33cf74592962df72246ae8"),
-  "username" : "Thaha",
-  "noOfBlogs" : 200,
-  "tags" : ["science", "robotics"]
-}
-{
-  "_id" : ObjectId("5f33cf74592962df72246ae9"),
-  "username" : "Thayebbah", 
-  "noOfBlogs" : 500,
-  "tags" : ["cooking", "general knowledge"]
-}
-{
-  "_id" : ObjectId("5f33cf74592962df72246aea"),
-  "username" : "Thaherah",
-  "noOfBlogs" : 50,
-  "tags" : ["beauty", "arts"]
-}
-*/
+  {
+    "acknowledged" : true,
+    "insertedIds" : [
+      ObjectId("5f33cfac592962df72246aeb"),
+      ObjectId("5f33cfac592962df72246aec")
+    ]
+  }
+  */
 
-// ดึงเอกสารที่มี username เป็น "Thaha" จากคอลเลกชัน "Collection1"
-db.Collection1.find({ username: "Thaha" });
+// ดึงข้อมูลจากคอลเลกชัน "records" โดยใช้คำสั่ง find() ธรรมดา
+db.records.find();
 
-// ผลลัพธ์จะแสดงเฉพาะเอกสารที่ตรงกับเงื่อนไข
+// ผลลัพธ์จะแสดงเอกสารที่ถูกดึงมาในรูปแบบที่ไม่ได้จัดรูปแบบ
 /*
-{
-  "_id" : ObjectId("5f33cf74592962df72246ae8"),
-  "username" : "Thaha",
-  "noOfBlogs" : 200,
-  "tags" : ["science", "robotics"]
-}
-*/
+  {
+    "_id" : ObjectId("5f33cfac592962df72246aeb"),
+    "Name" : "Aaliya A",
+    "City" : "Sydney"
+  }
+  {
+    "_id" : ObjectId("5f33cfac592962df72246aec"),
+    "Name" : "Naseem A",
+    "City" : "New Delhi"
+  }
+  */
 
-// ดึงเฉพาะ username และ noOfBlogs จากเอกสารในคอลเลกชัน "Collection1"
-db.Collection1.find({}, { username: 1, noOfBlogs: 1, _id: 0 });
+// ดึงข้อมูลจากคอลเลกชัน "records" โดยใช้คำสั่ง find() ร่วมกับเมธอด pretty()
+db.Collection1.find().pretty();
 
-// ผลลัพธ์จะแสดงเฉพาะแอตทริบิวต์ที่ระบุใน projection
+// ผลลัพธ์จะแสดงเอกสารที่ถูกดึงมาในรูปแบบที่จัดรูปแบบอย่างสวยงาม
 /*
-{ "username" : "Thaha", "noOfBlogs" : 200 }
-{ "username" : "Thayebbah", "noOfBlogs" : 500 }
-{ "username" : "Thaherah", "noOfBlogs" : 50 }
-*/
+  {
+    "_id" : ObjectId("5f33cfac592962df72246aeb"),
+    "Name" : "Aaliya A",
+    "City" : "Sydney"
+  }
+  {
+    "_id" : ObjectId("5f33cfac592962df72246aec"),
+    "Name" : "Naseem A",
+    "City" : "New Delhi"
+  }
+  */
